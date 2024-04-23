@@ -27,11 +27,11 @@ const app = () => {
               />
               <div className="flex flex-col justify-between p-4 leading-normal">
                 <div className="flex items-center justify-between">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {i.project.project_name}
                   </h5>
                 </div>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   {i.project.description}
                 </p>
                 <div className="w-[100%] [&>*]:m-[1%] ">

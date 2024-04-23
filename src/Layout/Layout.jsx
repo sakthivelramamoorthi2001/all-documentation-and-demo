@@ -6,7 +6,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Popover } from "antd";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import jsonData from "../json/index";
 import Loader from "../components/Loader";
 import logo from "../assets/images.png";
@@ -35,6 +35,7 @@ const App = () => {
   const [selectedData, setSelectedData] = useState(null);
   const navi = useNavigate();
   const [loading, setloading] = useState(false);
+  const { pathname } = useLocation();
   const { key } = useParams();
 
   const checkUrl = () => {
@@ -58,7 +59,7 @@ const App = () => {
   useEffect(() => {
     setloading(true);
     checkUrl();
-  }, []);
+  }, [pathname]);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -108,24 +109,30 @@ const App = () => {
           }}
           className="text-center flex flex-col align-middle items-center justify-center relative"
         >
-          <div className="font-mono text-2xl  ">All Documentation and Demo</div>
-          <h4 className="max-h-fit h-2 ">
-            {selectedData && selectedData.project.project_name}{" "}
-            <span>{selectedData && selectedData.project.version}</span>
-          </h4>
+          <div className="flex flex-col h-[3vh] text-center justify-center items-center ">
+            <h1 className="font-mono font-semibold md:text-2xl sm:text-xl ">
+              {" "}
+              All Documentation and Demo
+            </h1>
+            <h4 className=" ">
+              {selectedData && selectedData.project.project_name}{" "}
+              <span>{selectedData && selectedData.project.version}</span>
+            </h4>
+          </div>
 
           <Popover
             placement="leftBottom"
-            className="absolute right-[25px]"
+            className="hidden md:block absolute right-[25px]"
             content={
               <>
-                {url.map((i) => {
+                {url.map((i, index) => {
                   return (
                     <a
                       href={i.link}
+                      key={index}
                       target="_blank"
                       className={
-                        "p-3 text-[16px] capitalize flex justify-start items-center  hover:bg-[#1677ff] rounded-md  hover:text-white"
+                        "p-3 text-[16px]  capitalize flex justify-start items-center  hover:bg-[#1677ff] rounded-md  hover:text-white"
                       }
                     >
                       {i.name}
@@ -135,8 +142,8 @@ const App = () => {
               </>
             }
           >
-            <div className="p-2 flex justify-start items-center h-1/2 cursor-pointer bg-[#1677ff]  rounded-md">
-              <p className="text-white text-[16px]"> Self Profile</p>
+            <div className="md:flex  xs:hidden  p-2  justify-start items-center h-1/2 cursor-pointer bg-[#1677ff]  rounded-md text-white text-[16px]">
+              Profile
             </div>
           </Popover>
         </Header>

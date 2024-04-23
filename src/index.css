@@ -7,6 +7,25 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 481px) {
+  .ant-layout .ant-layout-sider {
+    position: absolute;
+    height: 100vh;
+  }
+
+  .project-overwrap ul li {
+    margin-top: 16px !important;
+  }
+
+  .project-overwrap pre {
+    overflow: scroll;
+  }
+}
+
+.ant-layout-header {
+  line-height: 24px;
+}
+
 .project-heading {
   font-size: 32px;
   font-weight: 500;

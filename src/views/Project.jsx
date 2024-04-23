@@ -11,12 +11,12 @@ const app = () => {
 
   const checkUrl = () => {
     const isExsist = jsonData.find((i) => i.id == key);
-    if (!isExsist) {
-      setTimeout(() => {
-        navi("/");
-      }, 3000);
-      return;
-    }
+    // if (!isExsist) {
+    //   setTimeout(() => {
+    //     navi("/");
+    //   }, 3000);
+    //   return;
+    // }
     setSelectedData({ ...isExsist });
     setTimeout(() => {
       setloading(false);
@@ -74,7 +74,10 @@ const app = () => {
       {selectedData &&
         selectedData.section.map((i) => {
           return (
-            <section className="p-10 project-overwrap" id={i.name + "-btn"}>
+            <section
+              className="md:p-10 xs:p-2 project-overwrap"
+              id={i.name + "-btn"}
+            >
               <h1 className="project-heading">{i.name}</h1>
               {i.data.map((item) => showComp(item.type, item.content))}
             </section>

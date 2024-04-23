@@ -3,23 +3,33 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { Layout, Menu, theme, Popover } from "antd";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import jsonData from "../json/index";
 import Loader from "../components/Loader";
-
+import logo from "../assets/images.png";
 const { Header, Content, Footer, Sider } = Layout;
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
+
+const url = [
+  {
+    name: "Github",
+    link: "https://github.com/sakthivelramamoorthi2001",
+  },
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/sakthivel-ramamoorthi-113125231/",
+  },
+  {
+    name: "Portfolio",
+    link: "https://web-portfolio-beta-nine.vercel.app/",
+  },
+  {
+    name: "email",
+    link: "mailto:sakthivel.ramamoorthi2001@gmail.com",
+  },
+];
 
 const App = () => {
   const [selectedData, setSelectedData] = useState(null);
@@ -33,6 +43,7 @@ const App = () => {
       setTimeout(() => {
         navi("/");
       }, 3000);
+      return;
     }
     setSelectedData({ ...isExsist });
     setTimeout(() => {
@@ -40,10 +51,9 @@ const App = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    if (selectedData) {
-    }
-  }, [selectedData]);
+  const handleClickSideNav = (id) => {
+    window.location.hash = id;
+  };
 
   useEffect(() => {
     setloading(true);
@@ -71,12 +81,15 @@ const App = () => {
         }}
       >
         <div className="font-mono font-semibold  ">
-          All Documentation and Demo
+          {/* <img src={logo} alt={logo} className="h-[100px]" /> */}
         </div>
         <Menu
           theme="dark"
           className="mt-[80px]"
           mode="inline"
+          onClick={(e) => {
+            handleClickSideNav(e.key + "-btn");
+          }}
           items={
             selectedData &&
             selectedData.section.map((i) => ({
@@ -93,9 +106,39 @@ const App = () => {
             padding: 0,
             background: colorBgContainer,
           }}
-          className="text-center flex align-middle items-center justify-center"
+          className="text-center flex flex-col align-middle items-center justify-center relative"
         >
           <div className="font-mono text-2xl  ">All Documentation and Demo</div>
+          <h4 className="max-h-fit h-2 ">
+            {selectedData && selectedData.project.project_name}{" "}
+            <span>{selectedData && selectedData.project.version}</span>
+          </h4>
+
+          <Popover
+            placement="leftBottom"
+            className="absolute right-[25px]"
+            content={
+              <>
+                {url.map((i) => {
+                  return (
+                    <a
+                      href={i.link}
+                      target="_blank"
+                      className={
+                        "p-3 text-[16px] capitalize flex justify-start items-center  hover:bg-[#1677ff] rounded-md  hover:text-white"
+                      }
+                    >
+                      {i.name}
+                    </a>
+                  );
+                })}
+              </>
+            }
+          >
+            <div className="p-2 flex justify-start items-center h-1/2 cursor-pointer bg-[#1677ff]  rounded-md">
+              <p className="text-white text-[16px]"> Self Profile</p>
+            </div>
+          </Popover>
         </Header>
         <Content
           style={{
@@ -119,7 +162,7 @@ const App = () => {
             textAlign: "center",
           }}
         >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          Designed and Built with ❤️ in Sakthivel Ramamoorthi
         </Footer>
       </Layout>
     </Layout>

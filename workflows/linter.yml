@@ -1,4 +1,4 @@
-name: Portfolio Linter
+name: All Documentation Linter
 on:
   push:
     branches: [main]

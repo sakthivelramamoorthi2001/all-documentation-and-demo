@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import jsonData from "../json/index";
+import credencialDev from "../assets/credential-dev.png";
 const app = () => {
   const navi = useNavigate();
+
+  const imglog = {
+    "pr-dev-01": credencialDev,
+  };
   return (
     <div className="p-12">
       <div className="flex items-center justify-center">
@@ -22,7 +27,7 @@ const app = () => {
             >
               <img
                 className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                src={i.project.project_img}
+                src={imglog[i.id]}
                 alt=""
               />
               <div className="flex flex-col justify-between p-4 leading-normal">

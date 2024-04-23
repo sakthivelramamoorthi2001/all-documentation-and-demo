@@ -34,13 +34,19 @@ const app = () => {
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   {i.project.description}
                 </p>
-                <div className="w-full [&>*]:m-[1%] ">
-                  <button className="w-[48%]   bg-gray-900 text-white rounded-md p-1 capitalize ">
+                <div className="w-[100%] [&>*]:m-[1%] ">
+                  <a
+                    href={i.project.project_live}
+                    className="!w-[48%]   bg-gray-900 text-white rounded-md p-1 capitalize "
+                  >
                     Live
-                  </button>
-                  <button className="w-[48%] bg-gray-900 text-white rounded-md p-1 capitalize ">
+                  </a>
+                  <a
+                    href={i.project.project_repo_link}
+                    className="!pointer-events-autow-[48%] bg-gray-900 text-white rounded-md p-1 capitalize "
+                  >
                     Github
-                  </button>
+                  </a>
                 </div>
               </div>
             </a>
